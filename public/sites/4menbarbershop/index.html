@@ -17,7 +17,7 @@
 <meta name="theme-color" content="#2a1d17">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23456f3a'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='20' font-weight='700' fill='%23fff' text-anchor='middle'%3E4%3C/text%3E%3C/svg%3E">
 <link rel="preload" href="fonts/hanken-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/hero.webp" as="image" type="image/webp" imagesrcset="img/hero-640.webp 640w, img/hero.webp 1280w" imagesizes="(min-width: 64rem) 72vw, 100vw" fetchpriority="high">
+<link rel="preload" href="img/hero.webp" as="image" type="image/webp" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -199,12 +199,12 @@ section[id] { scroll-margin-top: var(--header-h); }
 }
 .status[data-open="true"]::before { background: var(--accent); }
 .hero-photo { margin-top: clamp(2.5rem, 5vw, 4rem); }
-.hero-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface); }
+.hero-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--surface); }
 @media (min-width: 64rem) {
   .hero-body { grid-template-columns: 7fr 5fr; align-items: end; }
   .hero-aside { justify-self: end; text-align: right; }
   .actions .btn { flex: 0 0 auto; }
-  .hero-photo { display: grid; grid-template-columns: 1fr 3fr; gap: var(--gap); align-items: end; }
+  .hero-photo { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 4rem); align-items: end; }
   .hero-photo figcaption { order: -1; }
 }
 .caption { font-size: var(--step-small); color: var(--muted); margin-top: 0.75rem; }
@@ -278,12 +278,21 @@ section[id] { scroll-margin-top: var(--header-h); }
 
 /* 6. Photos */
 .photos h2 { margin-bottom: clamp(2rem, 4vw, 3rem); }
-.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-.photo-grid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: var(--surface); transition: transform 400ms var(--ease); }
-.photo-grid li { overflow: hidden; }
+.photo-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: clamp(12rem, 58vw, 16rem); gap: 0.5rem;
+  grid-template-areas: "trim trim" "chair cut" "fade cut" "lounge lounge";
+  list-style: none; margin: 0; padding: 0;
+}
+.photo-grid li { overflow: hidden; background: var(--surface); }
+.photo-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform 400ms var(--ease); }
 .photo-grid li:hover img { transform: scale(1.03); }
+.g-trim { grid-area: trim; } .g-chair { grid-area: chair; } .g-cut { grid-area: cut; }
+.g-fade { grid-area: fade; } .g-lounge { grid-area: lounge; }
 @media (min-width: 52rem) {
-  .photo-grid { grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+  .photo-grid {
+    grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(14rem, 28vw, 26rem); gap: var(--gap);
+    grid-template-areas: "trim trim chair cut" "lounge lounge fade cut";
+  }
 }
 
 /* 7. Visit */
@@ -388,7 +397,7 @@ section[id] { scroll-margin-top: var(--header-h); }
 <main id="inhoud">
   <section class="hero wrap" id="top" aria-labelledby="titel">
     <h1 id="titel">
-      <span class="line">Barbershop<span class="frame"><img src="img/hero-640.webp" width="640" height="360" alt="" decoding="async"></span></span>
+      <span class="line">Barbershop<span class="frame"><img src="img/hero-frame.webp" width="368" height="115" alt="" decoding="async"></span></span>
       <span class="line">in Rotterdam</span>
     </h1>
 
@@ -409,8 +418,8 @@ section[id] { scroll-margin-top: var(--header-h); }
     </div>
 
     <figure class="hero-photo">
-      <img src="img/hero.webp" srcset="img/hero-640.webp 640w, img/hero.webp 1280w" sizes="(min-width: 64rem) 72vw, 100vw" width="1280" height="720" alt="Barbier aan het werk in de stoel bij 4MEN Barbershop in Rotterdam" fetchpriority="high">
-      <figcaption class="caption"><span class="todo">[TODO: foto van de zaak of een knipbeurt, na toestemming eigenaar]</span></figcaption>
+      <img src="img/hero.webp" width="506" height="380" alt="Interieur van 4MEN Barbershop met een groot aquarium en een rij klassieke barbierstoelen" fetchpriority="high">
+      <figcaption class="caption">De zaak aan de Goudsesingel 101 in Rotterdam.</figcaption>
     </figure>
   </section>
 
@@ -491,7 +500,7 @@ section[id] { scroll-margin-top: var(--header-h); }
       </div>
       <div class="team-list">
         <article class="person" data-reveal>
-          <img src="img/team-ras.webp" width="600" height="750" loading="lazy" decoding="async" alt="Portret van Ras, oprichter van 4MEN Barbershop">
+          <img src="img/team-ras.webp" width="482" height="602" loading="lazy" decoding="async" alt="Portret van Ras, oprichter van 4MEN Barbershop">
           <div>
             <h3>Ras</h3>
             <p class="role">Oprichter</p>
@@ -499,7 +508,7 @@ section[id] { scroll-margin-top: var(--header-h); }
           </div>
         </article>
         <article class="person" data-reveal>
-          <img src="img/team-andrew.webp" width="600" height="750" loading="lazy" decoding="async" alt="Portret van Andrew, barbier bij 4MEN Barbershop">
+          <img src="img/team-andrew.webp" width="637" height="796" loading="lazy" decoding="async" alt="Portret van Andrew, barbier bij 4MEN Barbershop">
           <div>
             <h3>Andrew</h3>
             <p class="role">Barbier</p>
@@ -513,14 +522,12 @@ section[id] { scroll-margin-top: var(--header-h); }
   <section class="photos section wrap" id="fotos" aria-labelledby="fotos-titel">
     <h2 id="fotos-titel">Foto's uit de zaak</h2>
     <ul class="photo-grid" data-reveal>
-      <li><img src="img/foto-1.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Fade-kapsel bij 4MEN Barbershop in Rotterdam"></li>
-      <li><img src="img/foto-2.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Barbier trimt een baard bij 4MEN Barbershop"></li>
-      <li><img src="img/foto-3.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Hot towel scheerbeurt met een warme handdoek"></li>
-      <li><img src="img/foto-4.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Interieur van 4MEN Barbershop aan de Goudsesingel"></li>
-      <li><img src="img/foto-5.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Lang haar knippen bij 4MEN Barbershop in Rotterdam"></li>
-      <li><img src="img/foto-6.webp" width="800" height="1000" loading="lazy" decoding="async" alt="Strakke contouren bij de nek na een knipbeurt"></li>
+      <li class="g-trim"><img src="img/foto-ras-baard.webp" width="506" height="337" loading="lazy" decoding="async" alt="Ras trimt met kam en tondeuse de baard van een klant bij 4MEN Barbershop"></li>
+      <li class="g-chair"><img src="img/foto-stoel.webp" width="222" height="314" loading="lazy" decoding="async" alt="Klassieke lichtblauwe barbierstoel voor een spiegel in 4MEN Barbershop"></li>
+      <li class="g-cut"><img src="img/foto-andrew-knipt.webp" width="176" height="314" loading="lazy" decoding="async" alt="Andrew knipt het haar van een klant met schaar en kam"></li>
+      <li class="g-lounge"><img src="img/foto-wachtruimte.webp" width="506" height="350" loading="lazy" decoding="async" alt="Wachtruimte met gestreepte fauteuils, een grote wandklok en een rode vitrinekast"></li>
+      <li class="g-fade"><img src="img/foto-fade.webp" width="235" height="314" loading="lazy" decoding="async" alt="Fade-kapsel met strakke overgang bij 4MEN Barbershop in Rotterdam"></li>
     </ul>
-    <p class="caption"><span class="todo">[TODO: de beste foto's van de huidige site, na toestemming eigenaar]</span></p>
   </section>
 
   <section class="visit section" id="bezoek" aria-labelledby="bezoek-titel">
